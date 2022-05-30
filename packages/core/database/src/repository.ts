@@ -203,7 +203,7 @@ export class Repository<TModelAttributes extends {} = any, TCreationAttributes e
    * find
    * @param options
    */
-  async find(options?: FindOptions) {
+  async find<M extends Model>(options?: FindOptions) {
     const model = this.collection.model;
     const transaction = await this.getTransaction(options);
 
@@ -236,13 +236,13 @@ export class Repository<TModelAttributes extends {} = any, TCreationAttributes e
         ...omit(opts, ['limit', 'offset']),
         where,
         transaction,
-      });
+      }) as M[];
     }
 
     return await model.findAll({
       ...opts,
       transaction,
-    });
+    }) as M[];
   }
 
   /**

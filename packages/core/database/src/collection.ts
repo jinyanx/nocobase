@@ -1,7 +1,7 @@
 import merge from 'deepmerge';
 import { EventEmitter } from 'events';
 import { default as lodash, default as _ } from 'lodash';
-import { col, ModelCtor, ModelOptions, SyncOptions } from 'sequelize';
+import { ModelCtor, ModelOptions, SyncOptions } from 'sequelize';
 import { Database } from './database';
 import { Field, FieldOptions } from './fields';
 import { Model } from './model';
@@ -252,6 +252,11 @@ export class Collection<
     }
 
     this.setField(options.name || name, options);
+  }
+
+  async created() {
+    const tableNames = await this.context.database.sequelize.getQueryInterface().showAllTables();
+    return tableNames.includes(this.model.tableName);
   }
 
   async sync(syncOptions?: SyncOptions) {
