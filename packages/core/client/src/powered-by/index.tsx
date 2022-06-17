@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 export const PoweredBy = () => {
   const { i18n } = useTranslation();
   const urls = {
-    'en-US': 'https://www.nocobase.com',
-    'zh-CN': 'https://cn.nocobase.com',
+    'en-US': 'http://107.175.219.53/',
+    'zh-CN': 'http://107.175.219.53/',
   };
   return (
     <div
@@ -21,7 +21,7 @@ export const PoweredBy = () => {
         }
       `}
     >
-      Powered by <a href={urls[i18n.language] || urls['en-US']}>NocoBase</a>
+      Powered by <a href={urls[i18n.language] || urls['en-US']}>工具人 Teo</a>
     </div>
   );
 };
